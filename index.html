@@ -1,225 +1,268 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sport Market</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
-
+<title>GamerLink | متجر ألعاب</title>
 <style>
+/* ---- ألوان وطابع Gaming ---- */
 body {
-  margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: #fff;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
 }
-
-/* ===== HEADER ===== */
 header {
-  background: #FFD700;
-  padding: 15px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    background: linear-gradient(90deg, #8b5cf6, #4f46e5);
+    padding: 20px;
+    text-align: center;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 5px #000;
+    border-bottom: 2px solid #334155;
 }
-
-.logo {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
-  font-weight: bold;
+main {
+    padding: 20px;
+    flex-grow: 1;
 }
-
-.search input {
-  padding: 8px;
-  width: 260px;
-  border: none;
+.section {
+    display: none; /* سيتم التحكم بالعرض */
+    background: #111827cc;
+    padding: 20px;
+    border-radius: 15px;
+    border: 1px solid #334155;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-
-/* ===== NAV ===== */
-nav {
-  background: #000;
-  padding: 10px;
-  text-align: center;
+.section.active { display: block; }
+h2 {
+    margin-top: 0;
+    text-align: center;
+    color: #facc15;
+    text-shadow: 1px 1px 2px #000;
 }
-
-nav a {
-  color: #FFD700;
-  margin: 0 15px;
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* ===== HERO ===== */
-.hero {
-  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
-  url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg");
-  background-size: cover;
-  color: white;
-  padding: 80px 20px;
-  text-align: center;
-}
-
-.hero h1 {
-  font-size: 36px;
-}
-
-/* ===== PRODUCTS ===== */
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.product {
-  border: 1px solid #ddd;
-  padding: 10px;
-  text-align: center;
-}
-
-.product img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.price {
-  font-weight: bold;
-  margin: 5px 0;
-}
-
-button {
-  background: #FFD700;
-  border: none;
-  padding: 10px;
-  margin: 5px 0;
-  cursor: pointer;
-  font-weight: bold;
-  width: 100%;
-}
-
-button:hover {
-  background: #000;
-  color: white;
-}
-
-/* ===== CART ===== */
-#cartBox {
-  padding: 20px;
-  background: #f5f5f5;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 5px;
-}
-
-/* ===== RESPONSIVE ===== */
-@media (max-width:600px) {
-  header {
-    flex-direction: column;
-  }
-  .search input {
+input, textarea {
     width: 100%;
-    margin-top: 10px;
-  }
+    padding: 12px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: none;
+    background: #1e293b;
+    color: #fff;
+    font-size: 1rem;
+}
+button {
+    background: #8b5cf6;
+    color: white;
+    border: none;
+    padding: 14px;
+    width: 100%;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+button:hover {
+    background: #7c3aed;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+    gap: 20px;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1f2937;
+    border-radius: 15px;
+    padding: 15px;
+    border: 2px solid #4f46e5;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+}
+.card img {
+    width: 100%;
+    max-height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border: 2px solid #8b5cf6;
+}
+.price { color: #10b981; font-weight: bold; font-size: 1.2rem; margin-top:5px;}
+/* ---- تبويبات أسفل الصفحة ---- */
+nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    background: #1e293b;
+    border-top: 2px solid #334155;
+}
+nav button {
+    flex: 1;
+    border-radius: 0;
+    margin: 0;
+    padding: 15px 0;
+    font-size: 1rem;
+    background: #1e293b;
+    color: #facc15;
+}
+nav button.active { background: #8b5cf6; color: white;}
+nav button:hover { background: #7c3aed; color:white;}
+@media(max-width:600px){
+    main { padding: 10px; }
+    button { font-size: 0.9rem; padding: 12px; }
 }
 </style>
 </head>
-
 <body>
 
-<header>
-  <div class="logo">🏀 Sport Market</div>
-  <div class="search">
-    <input type="text" placeholder="ابحث عن منتج رياضي...">
-  </div>
-</header>
+<header>🎮 GamerLink</header>
 
+<main>
+    <!-- الصفحة الرئيسية -->
+    <div class="section active" id="home">
+        <h2>مرحبا بك في GamerLink</h2>
+        <p style="text-align:center;">هنا تجد أفضل حسابات الألعاب لشراء أو بيع حسابك بسهولة وبطابع Gaming رائع!</p>
+    </div>
+
+    <!-- صفحة السوق -->
+    <div class="section" id="marketPage">
+        <h2>الحسابات المتوفرة للبيع</h2>
+        <!-- إضافة منتج جديد -->
+        <div class="section" style="display:block; margin-bottom:20px;">
+            <h2>أضف حساب جديد للبيع</h2>
+            <input type="text" id="game" placeholder="اسم اللعبة">
+            <input type="number" id="price" placeholder="السعر بالدينار TND">
+            <textarea id="desc" placeholder="وصف الحساب (المستوى، السكنات...)"></textarea>
+            <input type="text" id="image" placeholder="رابط صورة الحساب (اختياري)">
+            <button onclick="addProduct()">نشر الآن ✅</button>
+        </div>
+        <div class="products" id="market">لا يوجد حسابات بعد.</div>
+    </div>
+
+    <!-- صفحة المشتريات -->
+    <div class="section" id="purchasesPage">
+        <h2>المشتريات الخاصة بك</h2>
+        <div class="products" id="purchases">لا توجد مشتريات بعد.</div>
+    </div>
+</main>
+
+<!-- تبويبات أسفل الصفحة -->
 <nav>
-  <a href="#">أحذية</a>
-  <a href="#">ملابس</a>
-  <a href="#">معدات</a>
-  <a href="#">عروض 🔥</a>
+    <button class="active" onclick="showPage('home', this)">الرئيسية</button>
+    <button onclick="showPage('marketPage', this)">السوق</button>
+    <button onclick="showPage('purchasesPage', this)">المشتريات</button>
 </nav>
 
-<section class="hero">
-  <h1>كل ما تحتاجه للرياضة في مكان واحد</h1>
-  <p>بيع وشراء معدات رياضية بسهولة وشفافية</p>
-</section>
-
-<!-- ===== PRODUCTS ===== -->
-<section class="products">
-
-  <div class="product">
-    <img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg">
-    <h3>حذاء رياضي</h3>
-    <p class="price">120 DT</p>
-    <button onclick="addToCart('حذاء رياضي',120)">أضف للسلة</button>
-    <a href="https://wa.me/216XXXXXXXX" target="_blank">
-      <button>تواصل مع البائع 💬</button>
-    </a>
-  </div>
-
-  <div class="product">
-    <img src="https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg">
-    <h3>كرة قدم</h3>
-    <p class="price">45 DT</p>
-    <button onclick="addToCart('كرة قدم',45)">أضف للسلة</button>
-    <a href="https://wa.me/216XXXXXXXX" target="_blank">
-      <button>تواصل مع البائع 💬</button>
-    </a>
-  </div>
-
-</section>
-
-<!-- ===== CART ===== -->
-<section id="cartBox">
-  <h2>🛒 سلة المشتريات</h2>
-  <div id="cartItems"></div>
-  <p id="total"></p>
-</section>
-
-<!-- ===== SCRIPT ===== -->
 <script>
-let cart = [];
-const COMMISSION_RATE = 0.04; // 4% عمولة
+// عناصر السوق والمشتريات
+const market = document.getElementById('market');
+const purchasesEl = document.getElementById('purchases');
+let products = JSON.parse(localStorage.getItem('products') || '[]');
+let purchases = JSON.parse(localStorage.getItem('purchases') || '[]');
 
-function addToCart(name, price) {
-  cart.push({name, price});
-  renderCart();
+const defaultImage = "https://images.unsplash.com/photo-1606813905051-0947f314fa92?auto=format&fit=crop&w=400&q=80";
+
+// عرض المنتجات في السوق
+function renderProducts() {
+    if(products.length === 0){
+        market.innerHTML = "لا يوجد حسابات بعد.";
+        return;
+    }
+    market.innerHTML = "";
+    products.forEach((prod, index) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="${prod.image || defaultImage}" alt="${prod.game}">
+            <h4>${prod.game}</h4>
+            <p>${prod.desc}</p>
+            <div class="price">${prod.price} TND</div>
+            <button onclick="buyProduct(${index})" style="background:#10b981; margin-top:10px;">شراء الآن 💳</button>
+        `;
+        market.appendChild(card);
+    });
 }
 
-function renderCart() {
-  let cartItems = document.getElementById("cartItems");
-  let total = 0;
-  cartItems.innerHTML = "";
-
-  cart.forEach((item, index) => {
-    total += item.price;
-    cartItems.innerHTML += `
-      <div class="cart-item">
-        <span>${item.name} - ${item.price} DT</span>
-        <button onclick="removeItem(${index})">❌</button>
-      </div>
-    `;
-  });
-
-  let commission = total * COMMISSION_RATE;
-  let sellerAmount = total - commission;
-
-  document.getElementById("total").innerHTML = `
-    <strong>إجمالي الطلب:</strong> ${total.toFixed(2)} DT<br>
-    <strong>عمولة الموقع (4%):</strong> ${commission.toFixed(2)} DT 💰<br>
-    <strong>مبلغ البائع:</strong> ${sellerAmount.toFixed(2)} DT
-  `;
+// عرض المشتريات
+function renderPurchases() {
+    if(purchases.length === 0){
+        purchasesEl.innerHTML = "لا توجد مشتريات بعد.";
+        return;
+    }
+    purchasesEl.innerHTML = "";
+    purchases.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+            <img src="${prod.image || defaultImage}" alt="${prod.game}">
+            <h4>${prod.game}</h4>
+            <p>${prod.desc}</p>
+            <div class="price">${prod.price} TND</div>
+        `;
+        purchasesEl.appendChild(card);
+    });
 }
 
-function removeItem(index) {
-  cart.splice(index, 1);
-  renderCart();
+// إضافة منتج جديد
+function addProduct() {
+    const game = document.getElementById('game').value.trim();
+    const price = document.getElementById('price').value.trim();
+    const desc = document.getElementById('desc').value.trim();
+    const image = document.getElementById('image').value.trim();
+
+    if(!game || !price){
+        alert("يرجى إدخال اسم اللعبة والسعر!");
+        return;
+    }
+
+    const product = {game, price, desc, image};
+    products.unshift(product);
+    localStorage.setItem('products', JSON.stringify(products));
+
+    renderProducts();
+
+    document.getElementById('game').value = '';
+    document.getElementById('price').value = '';
+    document.getElementById('desc').value = '';
+    document.getElementById('image').value = '';
+
+    alert("تم النشر! الحساب ظهر في السوق.");
 }
+
+// شراء المنتج
+function buyProduct(index){
+    if(confirm("هل تريد شراء هذا الحساب؟")){
+        const purchased = products.splice(index,1)[0];
+        purchases.unshift(purchased);
+        localStorage.setItem('products', JSON.stringify(products));
+        localStorage.setItem('purchases', JSON.stringify(purchases));
+        renderProducts();
+        renderPurchases();
+        alert("تم الشراء!");
+    }
+}
+
+// التبديل بين الصفحات
+function showPage(pageId, btn){
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+
+    document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+}
+
+// عرض أول مرة
+renderProducts();
+renderPurchases();
 </script>
 
 </body>
