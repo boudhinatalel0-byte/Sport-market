@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sport Market</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #fff;
+}
+
+/* ===== HEADER ===== */
+header {
+  background: #FFD700;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.search input {
+  padding: 8px;
+  width: 260px;
+  border: none;
+}
+
+/* ===== NAV ===== */
+nav {
+  background: #000;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: #FFD700;
+  margin: 0 15px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* ===== HERO ===== */
+.hero {
+  background: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)),
+  url("https://images.pexels.com/photos/1552242/pexels-photo-1552242.jpeg");
+  background-size: cover;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 36px;
+}
+
+/* ===== PRODUCTS ===== */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.product {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+.product img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.price {
+  font-weight: bold;
+  margin: 5px 0;
+}
+
+button {
+  background: #FFD700;
+  border: none;
+  padding: 10px;
+  margin: 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+}
+
+button:hover {
+  background: #000;
+  color: white;
+}
+
+/* ===== CART ===== */
+#cartBox {
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width:600px) {
+  header {
+    flex-direction: column;
+  }
+  .search input {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">🏀 Sport Market</div>
+  <div class="search">
+    <input type="text" placeholder="ابحث عن منتج رياضي...">
+  </div>
+</header>
+
+<nav>
+  <a href="#">أحذية</a>
+  <a href="#">ملابس</a>
+  <a href="#">معدات</a>
+  <a href="#">عروض 🔥</a>
+</nav>
+
+<section class="hero">
+  <h1>كل ما تحتاجه للرياضة في مكان واحد</h1>
+  <p>بيع وشراء معدات رياضية بسهولة وشفافية</p>
+</section>
+
+<!-- ===== PRODUCTS ===== -->
+<section class="products">
+
+  <div class="product">
+    <img src="https://images.pexels.com/photos/2529148/pexels-photo-2529148.jpeg">
+    <h3>حذاء رياضي</h3>
+    <p class="price">120 DT</p>
+    <button onclick="addToCart('حذاء رياضي',120)">أضف للسلة</button>
+    <a href="https://wa.me/216XXXXXXXX" target="_blank">
+      <button>تواصل مع البائع 💬</button>
+    </a>
+  </div>
+
+  <div class="product">
+    <img src="https://images.pexels.com/photos/2294361/pexels-photo-2294361.jpeg">
+    <h3>كرة قدم</h3>
+    <p class="price">45 DT</p>
+    <button onclick="addToCart('كرة قدم',45)">أضف للسلة</button>
+    <a href="https://wa.me/216XXXXXXXX" target="_blank">
+      <button>تواصل مع البائع 💬</button>
+    </a>
+  </div>
+
+</section>
+
+<!-- ===== CART ===== -->
+<section id="cartBox">
+  <h2>🛒 سلة المشتريات</h2>
+  <div id="cartItems"></div>
+  <p id="total"></p>
+</section>
+
+<!-- ===== SCRIPT ===== -->
+<script>
+let cart = [];
+const COMMISSION_RATE = 0.04; // 4% عمولة
+
+function addToCart(name, price) {
+  cart.push({name, price});
+  renderCart();
+}
+
+function renderCart() {
+  let cartItems = document.getElementById("cartItems");
+  let total = 0;
+  cartItems.innerHTML = "";
+
+  cart.forEach((item, index) => {
+    total += item.price;
+    cartItems.innerHTML += `
+      <div class="cart-item">
+        <span>${item.name} - ${item.price} DT</span>
+        <button onclick="removeItem(${index})">❌</button>
+      </div>
+    `;
+  });
+
+  let commission = total * COMMISSION_RATE;
+  let sellerAmount = total - commission;
+
+  document.getElementById("total").innerHTML = `
+    <strong>إجمالي الطلب:</strong> ${total.toFixed(2)} DT<br>
+    <strong>عمولة الموقع (4%):</strong> ${commission.toFixed(2)} DT 💰<br>
+    <strong>مبلغ البائع:</strong> ${sellerAmount.toFixed(2)} DT
+  `;
+}
+
+function removeItem(index) {
+  cart.splice(index, 1);
+  renderCart();
+}
+</script>
+
+</body>
+  </html>
